@@ -1,7 +1,7 @@
 # CryptoTrackr
 
 ## Description
-[CryptoTrackr](https://crypto-trackr-01.netlify.app/) is an app that allows you to keep track of crypto prices and relevant news. The app fetches data from [RapidAPI](https://rapidapi.com/hub) using [Redux Toolkit](https://redux-toolkit.js.org/). This app is deployed on [Netlify](https://www.netlify.com/).
+[CryptoTrackr](https://cryptotrackr-01.netlify.app/) is an app that allows you to keep track of crypto prices and relevant news. The app fetches data from [RapidAPI](https://rapidapi.com/hub) using [Redux Toolkit](https://redux-toolkit.js.org/). This app is deployed on [Netlify](https://www.netlify.com/).
 
 ## Features
 - Updated crypto prices powered by [Coinranking](https://rapidapi.com/Coinranking/api/coinranking1)
