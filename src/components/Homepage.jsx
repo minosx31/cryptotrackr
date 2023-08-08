@@ -1,7 +1,7 @@
 import { Col, Divider, Row, Statistic, Typography } from 'antd';
 import millify from 'millify';
 import { Link } from 'react-router-dom';
-import { useGetCryptosQuery } from '../services/CryptoApi';
+import { useGetCryptosQuery } from '../api/CryptoApi';
 import Cryptocurrencies from './Cryptocurrencies';
 import News from './News';
 import Loading from './Loading';

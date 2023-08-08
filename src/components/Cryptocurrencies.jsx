@@ -1,16 +1,15 @@
 import { Card, Col, Image, Input, Row, Space, Typography } from "antd"
 import millify from "millify"
-import { Link } from "react-router-dom"
-import { useGetCryptosQuery } from "../services/CryptoApi"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import { useGetCryptosQuery } from "../api/CryptoApi"
+import { format } from "../utils/format"
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
   const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
   const [cryptos, setCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-
-  //console.log("cryptos", cryptosList);
 
   useEffect(() => {
     const filteredData = cryptosList?.data?.coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -48,7 +47,7 @@ const Cryptocurrencies = ({ simplified }) => {
                 >
                   <Space style={{ fontWeight: "600" }} direction="vertical">
                     <Typography.Text>
-                      Price: {millify(crypto.price)}
+                      Price: {format(Number(crypto.price).toFixed(2))}
                     </Typography.Text>
                     
                     <Typography.Text>

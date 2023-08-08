@@ -1,8 +1,8 @@
 import {Avatar, Card, Col, Row, Select, Space, Typography} from 'antd';
 import moment from 'moment';
-import { useGetCryptoNewsQuery } from '../services/CryptoNewsApi';
+import { useGetCryptoNewsQuery } from '../api/CryptoNewsApi';
 import { useState } from 'react';
-import { useGetCryptosQuery } from '../services/CryptoApi';
+import { useGetCryptosQuery } from '../api/CryptoApi';
 import Loading from './Loading';
 
 const demoImage = 'http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg';
