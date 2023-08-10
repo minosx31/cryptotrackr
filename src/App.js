@@ -1,13 +1,13 @@
-import { Routes, Route, Link } from 'react-router-dom';
-import { Avatar, Divider, Layout, Menu, Space, Typography } from 'antd';
-import Homepage from './components/Homepage';
-import Cryptocurrencies from './components/Cryptocurrencies';
-import { CryptoDetails } from './components/CryptoDetails';
-import News from './components/News';
-import './App.css'
 import { BulbOutlined, FundOutlined } from '@ant-design/icons';
+import { Avatar, Divider, Layout, Menu, Space, Typography } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';
-import icon from "./images/logo.png"
+import { Link, Route, Routes } from 'react-router-dom';
+import './App.css';
+import { CryptoDetails } from './components/CryptoDetails';
+import Cryptocurrencies from './components/Cryptocurrencies';
+import Homepage from './components/Homepage';
+import News from './components/News';
+import icon from "./images/logo.png";
 
 function getItem(label, key, icon) {
   return {
@@ -33,6 +33,8 @@ function App() {
         width: "100%",
         display: "flex",
         alignItems: "center",
+        paddingLeft: 12,
+        paddingRight: 12,
       }}>
         <Space block direction='horizontal'>
           <Link to='/' style={{
@@ -42,7 +44,8 @@ function App() {
             gap: "10px"
           }}>
             <Avatar src={icon} size={40} shape="square" style={{padding: "2px"}}/>
-            <Typography.Text 
+            <Typography.Text
+              className='logo-text'
               strong
               style={{
                 fontSize: "24px",

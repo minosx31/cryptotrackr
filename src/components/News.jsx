@@ -1,18 +1,16 @@
-import {Avatar, Card, Col, Row, Select, Space, Typography} from 'antd';
+import { Avatar, Image, List, Select, Space, Typography } from 'antd';
 import moment from 'moment';
-import { useGetCryptoNewsQuery } from '../api/CryptoNewsApi';
 import { useState } from 'react';
 import { useGetCryptosQuery } from '../api/CryptoApi';
+import { useGetCryptoNewsQuery } from '../api/CryptoNewsApi';
 import Loading from './Loading';
 
 const demoImage = 'http://coinrevolution.com/wp-content/uploads/2020/06/cryptonews.jpg';
 
 const News = ({ simplified }) => {
   const [newsCategory, setNewsCategory] = useState('Cryptocurrency')
-  const { data: cryptoNews, isFetching: isFetchingNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified? 6 : 12 });
+  const { data: cryptoNews, isFetching: isFetchingNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified? 8 : 20 });
   const { data: cryptosList, isFetching: isFetchingCryptos } = useGetCryptosQuery(100);
-  
-  //console.log("cryptonews", cryptoNews);
 
   if (isFetchingNews || isFetchingCryptos) return <Loading />;
 
@@ -42,43 +40,34 @@ const News = ({ simplified }) => {
         </div>
       )}
 
-      <Row gutter={[24,24]}>
-        {cryptoNews?.value.map((news, index) => (
-          <Col xs={24} sm={12} lg={8} key={index}>
-            <Card 
-              loading={isFetchingNews}
-              hoverable 
-              className='news-card'
-            >
-              <a href={news.url} target='_blank' rel='noreferrer'>
-                <div className='news-image-container'>
-                  <Typography.Title level={4} className='news-title'>
-                    {news.name}
-                  </Typography.Title>
-
-                  <img style={{maxWidth: '100px', maxHeight: '100px' }} src={news?.image?.thumbnail?.contentUrl || demoImage} alt='news' />
-                </div>
-
-                <p style={{ margin: "10px 0"}}>
-                  {news.description > 100 ? `${news.description.substring(0,100)}...` : news.description}
-                </p>
-
-                <Space direction='vertical'>
-                  <Space>
-                    <Avatar src={news.provider[0]?.image?.thumbnail?.contentUrl || demoImage} alt='news' />
-                    <Typography.Text className='provider-name' style={{
-
-                    }}>{news.provider[0]?.name}</Typography.Text>
-                  </Space>
-                  <Typography.Text>
-                      {moment(news.datePublished).startOf('ss').fromNow()}
-                  </Typography.Text>
-                </Space>
-              </a>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <List
+        itemLayout='vertical'
+        size='large'
+        dataSource={cryptoNews.value}
+        renderItem={(news, index) => (
+          <List.Item
+            style={{ margin: "20px 0"}}
+            key={index}
+            actions={[
+              <Space>
+              <Avatar src={news.provider[0]?.image?.thumbnail?.contentUrl || demoImage} alt='news' />
+                <Typography.Text>{news.provider[0]?.name}</Typography.Text>
+              </Space>,
+              <Typography.Text>
+                {moment(news.datePublished).startOf('ss').fromNow()}
+              </Typography.Text>
+            ]}
+          >
+            <a href={news.url} target='_blank' rel='noreferrer'>
+              <List.Item.Meta 
+                avatar={<Image preview={false} width={100} src={news.image?.thumbnail?.contentUrl || demoImage} alt='news-thumbnail' />}
+                title={news.name}
+                description={news.description}
+              />
+            </a>
+          </List.Item>
+        )}
+      />
     </>
   )
 }

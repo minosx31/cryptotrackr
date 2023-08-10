@@ -1,17 +1,15 @@
-import { Col, Divider, Row, Statistic, Typography } from 'antd';
+import { Col, Divider, Row, Space, Statistic, Typography } from 'antd';
 import millify from 'millify';
 import { Link } from 'react-router-dom';
 import { useGetCryptosQuery } from '../api/CryptoApi';
 import Cryptocurrencies from './Cryptocurrencies';
-import News from './News';
 import Loading from './Loading';
+import News from './News';
 
 const Homepage = () => {
   const { data, isFetching } = useGetCryptosQuery(10);
 
   const globalStats = data?.data?.stats;
-
-  // console.log("data", data);
 
   if (isFetching) return <Loading />;
 
@@ -42,32 +40,35 @@ const Homepage = () => {
 
       <Divider style={{ border: "1px solid" }} />
 
-      <div className='home-heading-container'>
-        <Typography.Title level={2} style={{ margin: "0" }}>
-          Top 10 Cryptocurrencies in the World
+      <Space direction='vertical'>
+        <Typography.Title level={2}>
+            Top 10 Cryptocurrencies in the World
         </Typography.Title>
-        
-        <Typography.Title level={3} style={{ margin: "4px 0 4px 0"}}>
+
+        <Cryptocurrencies simplified={true} />
+
+        <Typography.Title className='homepage-show-more' level={4}>
           <Link to="/cryptocurrencies">
             Show More
           </Link>
         </Typography.Title>
-      </div>
-      <Cryptocurrencies simplified={true} />
-
+      </Space>
+        
       <Divider style={{ border: "1px solid" }} />
       
-      <div className='home-heading-container'>
-        <Typography.Title level={2} style={{ margin: "0" }}>
-          Latest Crypto News
+      <Space direction='vertical' style={{ width: '100%'}}>
+        <Typography.Title level={2}>
+            Latest Crypto News
         </Typography.Title>
-        <Typography.Title level={3} style={{ margin: "4px 0 4px 0"}}>
+
+        <News simplified={true} />
+
+        <Typography.Title className='homepage-show-more' level={4}>
           <Link to="/news">
             Show More
           </Link>
         </Typography.Title>
-      </div>
-      <News simplified={true} />
+      </Space>
     </>
   )
 }

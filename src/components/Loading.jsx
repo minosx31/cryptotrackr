@@ -5,7 +5,7 @@ const Loading = () => {
     const icon = <LoadingOutlined />
 
   return (
-    <div className='loader'>
+    <div className='loading'>
         <Spin size='large' indicator={icon} />
     </div>
   )

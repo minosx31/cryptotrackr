@@ -3,3 +3,28 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage-show-more {
+    margin: 4px, 0, 4px, 0;
+    text-align: center;
+}
+
+.positive-change {
+    color: #00a68c;
+}
+
+.negative-change {
+    color: #d9475a;
+}
+
+@media (max-width: 640px) {
+    .logo-text {
+        display: none;
+    }
+}

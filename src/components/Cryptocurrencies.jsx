@@ -1,4 +1,4 @@
-import { Card, Col, Image, Input, Row, Space, Typography } from "antd"
+import { Card, Col, Image, Input, Row, Space } from "antd"
 import millify from "millify"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
@@ -13,7 +13,7 @@ const Cryptocurrencies = ({ simplified }) => {
 
   useEffect(() => {
     const filteredData = cryptosList?.data?.coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm.toLowerCase()))
-
+    
     setCryptos(filteredData);
   }, [cryptosList, searchTerm])
 
@@ -46,17 +46,16 @@ const Cryptocurrencies = ({ simplified }) => {
                   hoverable
                 >
                   <Space style={{ fontWeight: "600" }} direction="vertical">
-                    <Typography.Text>
-                      Price: {format(Number(crypto.price).toFixed(2))}
-                    </Typography.Text>
+                    <p>Price: ${format(Number(crypto.price).toFixed(2))}</p>
                     
-                    <Typography.Text>
-                      Market Cap: {millify(crypto.marketCap)}
-                    </Typography.Text>
+                    <p>Market Cap: ${millify(crypto.marketCap)}</p>
                     
-                    <Typography.Text>
-                      Daily Change: {millify(crypto.change)}%
-                    </Typography.Text>
+                    <Space>
+                    <p>Daily Change: </p>
+                    <p className={Number(crypto.change) < 0 ? "negative-change" : "positive-change" }>
+                      {crypto.change > 0 ? '+' : ''}{(Number(crypto.change).toFixed(2))}%
+                    </p>
+                    </Space>
                   </Space>
                 </Card>
               </Link>

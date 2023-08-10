@@ -13,8 +13,6 @@ const LineChart = ({ coinDetails }) => {
     const [timePeriod, setTimePeriod] = useState('7d');
     const { data: coinHistory, isFetching: isFetchingHistory } = useGetCryptoHistoryQuery({ coinId, timePeriod });
 
-    console.log("crypto history", coinHistory);
-
     if (isFetchingHistory) return <Loading />
 
     Chart.register(
@@ -83,13 +81,13 @@ const LineChart = ({ coinDetails }) => {
     <>
         <Row justify='space-between' style={{ display: "flex", alignItems: "center" }}>
             <Space>
-                <Typography.Title level={3} style={{ margin: 0, marginRight: '20px'}}>
+                <Typography.Title level={3} style={{ margin: 0, marginRight: '12px'}}>
                     Current Price: ${format(Number(coinDetails.price).toFixed(2))}
                 </Typography.Title>
 
-                <Typography.Title level={5} style={{ margin: 0 }}>
-                    {coinHistory.data.change < 0 ? '' : '+'}{coinHistory.data.change}%
-                </Typography.Title>
+                <p className={coinHistory.data.change < 0 ? "negative-change" : "positive-change"} style={{ fontSize: 'x-large', fontWeight: 600 }}>
+                    {coinHistory.data.change > 0 ? '+' : ''}{coinHistory.data.change}%
+                </p>
             </Space>
 
             <Select
