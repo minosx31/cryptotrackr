@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { useGetCryptosQuery } from "../api/CryptoApi"
 import { format } from "../utils/format"
+import Loading from "./Loading"
 
 const Cryptocurrencies = ({ simplified }) => {
   const count = simplified ? 10 : 100;
@@ -16,6 +17,8 @@ const Cryptocurrencies = ({ simplified }) => {
     
     setCryptos(filteredData);
   }, [cryptosList, searchTerm])
+
+  if (isFetching) return <Loading />;
 
   return (
       <>
